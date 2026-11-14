@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Yangi kitob qo'shish</title>
+</head>
+<body>
+    <h1>Yangi kitob qo'shish</h1>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Saqlash</button>
+    </form>
+    <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
+</body>
+</html>

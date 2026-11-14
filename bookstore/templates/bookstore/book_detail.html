@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+
+    {% if book.image %}
+        <img src="{{ book.image.url }}" alt="{{ book.title }}" width="200">
+    {% endif %}
+
+    <p>Muallif: {{ book.author }}</p>
+    <p>Narxi: {{ book.price }} so'm</p>
+    <p>Janr: {{ book.category.name|default:"ko'rsatilmagan" }}</p>
+
+    {% if book.file %}
+        <p><a href="{{ book.file.url }}" download>Kitobni yuklab olish</a></p>
+    {% endif %}
+
+    <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
+</body>
+</html>

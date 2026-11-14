@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitoblar ro'yxati</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/jdu_logo.png' %}" alt="JDU logotipi" class="logo">
+        <h1>Kitoblar ro'yxati</h1>
+    </header>
+
+    {% if user.is_authenticated %}
+        <div class="userbar">
+            Salom, {{ user.username }}!
+            <form method="post" action="{% url 'logout' %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit">Chiqish</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <section class="media">
+        <img src="{% static 'images/photo.jpg' %}" alt="Mening suratim" class="photo">
+        <video controls width="320">
+            <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
+            Brauzeringiz videoni qo'llab-quvvatlamaydi.
+        </video>
+    </section>
+
+    <ul class="books">
+        {% for book in books %}
+            <li>
+                {% if book.image %}
+                    <img src="{{ book.image.url }}" alt="{{ book.title }}" width="60">
+                {% endif %}
+                <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                — {{ book.author }} — {{ book.price }} so'm
+                — Janr: {{ book.category.name|default:"ko'rsatilmagan" }}
+            </li>
+        {% empty %}
+            <li>Kitoblar yo'q</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'book_create' %}">+ Yangi kitob qo'shish</a></p>
+</body>
+</html>
