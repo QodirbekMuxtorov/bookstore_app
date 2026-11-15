@@ -3,9 +3,9 @@ from django.views.generic import ListView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from .forms import BookForm
-from .models import Book
 from rest_framework import viewsets
+from .forms import BookForm, OrderForm
+from .models import Book, Order
 from .serializers import BookSerializer
 
 
@@ -43,6 +43,26 @@ def register(request):
     return render(request, 'bookstore/register.html', {'form': form})
 
 
+@login_required
+def order_create(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
+            return redirect('order_list')
+    else:
+        form = OrderForm(initial={'book': request.GET.get('book')})
+    return render(request, 'bookstore/order_form.html', {'form': form})
+
+
+@login_required
+def order_list(request):
+    orders = Order.objects.filter(user=request.user).select_related('book')
+    return render(request, 'bookstore/order_list.html', {'orders': orders})
+
+
 class BookListView(ListView):
     model = Book
     template_name = 'bookstore/book_list.html'
@@ -50,6 +70,7 @@ class BookListView(ListView):
 
     def get_queryset(self):
         return Book.objects.select_related('category')
+
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()

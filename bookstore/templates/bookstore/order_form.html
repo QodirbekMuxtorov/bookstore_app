@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Buyurtma berish</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Buyurtma berish</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Buyurtma berish</button>
+    </form>
+    <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
+</body>
+</html>

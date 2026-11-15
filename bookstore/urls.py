@@ -7,6 +7,8 @@ urlpatterns = [
     path('books/add/', views.book_create, name='book_create'),
     path('books/<int:id>/', views.book_detail, name='book_detail'),
     path('books-cbv/', views.BookListView.as_view(), name='book_list_cbv'),
+    path('orders/', views.order_list, name='order_list'),
+    path('orders/add/', views.order_create, name='order_create'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='bookstore/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

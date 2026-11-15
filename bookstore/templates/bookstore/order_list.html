@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Mening buyurtmalarim</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Mening buyurtmalarim</h1>
+    <ul class="books">
+        {% for order in orders %}
+            <li>
+                {{ order.book.title }} x {{ order.quantity }}
+                — {{ order.total_price }} so'm
+                — {{ order.get_status_display }}
+                — {{ order.created_at|date:"d.m.Y H:i" }}
+            </li>
+        {% empty %}
+            <li>Buyurtmalar yo'q</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
+</body>
+</html>

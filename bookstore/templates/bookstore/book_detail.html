@@ -14,12 +14,17 @@
     {% endif %}
 
     <p>Muallif: {{ book.author }}</p>
+    {% if book.writer %}
+        <p>Muallif (profil): {{ book.writer.name }}</p>
+    {% endif %}
     <p>Narxi: {{ book.price }} so'm</p>
     <p>Janr: {{ book.category.name|default:"ko'rsatilmagan" }}</p>
 
     {% if book.file %}
         <p><a href="{{ book.file.url }}" download>Kitobni yuklab olish</a></p>
     {% endif %}
+
+    <p><a href="{% url 'order_create' %}?book={{ book.id }}">Buyurtma berish</a></p>
 
     <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
 </body>
