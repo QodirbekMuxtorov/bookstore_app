@@ -10,6 +10,8 @@
 - /bookstore/books/ : kitoblar ro'yxati
 - /bookstore/books/<id>/ : kitob tafsiloti
 - /bookstore/books/add/ : kitob qo'shish formasi
+- /bookstore/books/<id>/edit/ : kitobni tahrirlash
+- /bookstore/books/<id>/delete/ : kitobni o'chirish
 - /bookstore/orders/add/ : buyurtma berish
 - /bookstore/orders/ : mening buyurtmalarim
 - /bookstore/register/, /login/, /logout/ : autentifikatsiya
