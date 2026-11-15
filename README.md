@@ -1,5 +1,7 @@
 # Kitob do'koni (bookstore_app)
 
+Django yordamida yaratilgan kitob do'koni veb-ilovasi (Introduction to Django kursi, yakuniy loyiha).
+
 ## Modellar
 - Category: janr nomi
 - Author: muallif (name, bio)
@@ -7,17 +9,29 @@
 - Order: user, book, quantity, status, created_at
 
 ## Sahifalar
-- /bookstore/books/ : kitoblar ro'yxati
-- /bookstore/books/<id>/ : kitob tafsiloti
-- /bookstore/books/add/ : kitob qo'shish formasi
-- /bookstore/books/<id>/edit/ : kitobni tahrirlash
-- /bookstore/books/<id>/delete/ : kitobni o'chirish
-- /bookstore/orders/add/ : buyurtma berish
-- /bookstore/orders/ : mening buyurtmalarim
-- /bookstore/register/, /login/, /logout/ : autentifikatsiya
-- /api/bookstore/ : REST API
+- `/bookstore/books/` : kitoblar ro'yxati
+- `/bookstore/books/<id>/` : kitob tafsiloti
+- `/bookstore/books/add/` : kitob qo'shish formasi
+- `/bookstore/books/<id>/edit/` : kitobni tahrirlash
+- `/bookstore/books/<id>/delete/` : kitobni o'chirish
+- `/bookstore/orders/add/` : buyurtma berish
+- `/bookstore/orders/` : mening buyurtmalarim
+- `/bookstore/register/`, `/bookstore/login/`, `/bookstore/logout/` : autentifikatsiya
+- `/api/bookstore/` : REST API
 
 ## Foydalanuvchi rollari
 - Mehmon: faqat login/register sahifalarini ko'radi
-- Foydalanuvchi: kitoblarni ko'radi, buyurtma beradi
+- Foydalanuvchi: kitoblarni ko'radi, qo'shadi, tahrirlaydi, o'chiradi va buyurtma beradi
 - Admin: admin paneldan kitob, muallif va buyurtmalarni boshqaradi
+
+## Ishga tushirish
+```powershell
+pip install django djangorestframework Pillow pytest pytest-django
+python manage.py migrate
+python manage.py runserver
+```
+
+## Testlar
+```powershell
+python -m pytest
+```
