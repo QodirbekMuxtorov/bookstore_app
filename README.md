@@ -21,8 +21,8 @@ Django yordamida yaratilgan kitob do'koni veb-ilovasi (Introduction to Django ku
 
 ## Foydalanuvchi rollari
 - Mehmon: faqat login/register sahifalarini ko'radi
-- Foydalanuvchi: kitoblarni ko'radi, qo'shadi, tahrirlaydi, o'chiradi va buyurtma beradi
-- Admin: admin paneldan kitob, muallif va buyurtmalarni boshqaradi
+- Foydalanuvchi: kitoblarni ko'radi va buyurtma beradi
+- Admin (staff): kitoblarni qo'shadi, tahrirlaydi, o'chiradi; muallif va buyurtmalarni admin paneldan boshqaradi
 
 ## Ishga tushirish
 ```powershell

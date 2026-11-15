@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 from django.contrib.auth import login
@@ -7,6 +8,15 @@ from rest_framework import viewsets
 from .forms import BookForm, OrderForm
 from .models import Book, Order
 from .serializers import BookSerializer
+
+
+def staff_required(view_func):
+    @login_required
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_staff:
+            raise PermissionDenied
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 
 @login_required
@@ -20,7 +30,7 @@ def book_detail(request, id):
     return render(request, 'bookstore/book_detail.html', {'book': book})
 
 
-@login_required
+@staff_required
 def book_create(request):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
@@ -32,7 +42,7 @@ def book_create(request):
     return render(request, 'bookstore/book_form.html', {'form': form})
 
 
-@login_required
+@staff_required
 def book_update(request, id):
     book = get_object_or_404(Book, id=id)
     if request.method == 'POST':
@@ -45,7 +55,7 @@ def book_update(request, id):
     return render(request, 'bookstore/book_form.html', {'form': form, 'book': book})
 
 
-@login_required
+@staff_required
 def book_delete(request, id):
     book = get_object_or_404(Book, id=id)
     if request.method == 'POST':

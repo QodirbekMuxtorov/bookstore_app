@@ -46,6 +46,8 @@
         {% endfor %}
     </ul>
 
-    <p><a href="{% url 'book_create' %}">+ Yangi kitob qo'shish</a></p>
+    {% if user.is_staff %}
+        <p><a href="{% url 'book_create' %}">+ Yangi kitob qo'shish</a></p>
+    {% endif %}
 </body>
 </html>
