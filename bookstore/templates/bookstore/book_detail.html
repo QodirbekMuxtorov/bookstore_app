@@ -26,6 +26,13 @@
 
     <p><a href="{% url 'order_create' %}?book={{ book.id }}">Buyurtma berish</a></p>
 
+    {% if user.is_authenticated %}
+        <p>
+            <a href="{% url 'book_update' book.id %}">Tahrirlash</a> |
+            <a href="{% url 'book_delete' book.id %}">O'chirish</a>
+        </p>
+    {% endif %}
+
     <a href="{% url 'book_list' %}">← Ro'yxatga qaytish</a>
 </body>
 </html>

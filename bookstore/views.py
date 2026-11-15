@@ -20,6 +20,7 @@ def book_detail(request, id):
     return render(request, 'bookstore/book_detail.html', {'book': book})
 
 
+@login_required
 def book_create(request):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
@@ -29,6 +30,28 @@ def book_create(request):
     else:
         form = BookForm()
     return render(request, 'bookstore/book_form.html', {'form': form})
+
+
+@login_required
+def book_update(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('book_detail', id=book.id)
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'bookstore/book_form.html', {'form': form, 'book': book})
+
+
+@login_required
+def book_delete(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('book_list')
+    return render(request, 'bookstore/book_confirm_delete.html', {'book': book})
 
 
 def register(request):

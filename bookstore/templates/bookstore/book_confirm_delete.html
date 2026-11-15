@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>O'chirishni tasdiqlash</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>"{{ book.title }}" kitobini o'chirasizmi?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Ha, o'chirish</button>
+    </form>
+    <a href="{% url 'book_detail' book.id %}">Bekor qilish</a>
+</body>
+</html>
